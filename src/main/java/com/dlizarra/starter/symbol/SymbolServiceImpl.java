@@ -15,24 +15,28 @@ public class SymbolServiceImpl implements SymbolService {
     @Autowired
     private SymbolRepository symbolRepository;
 
-    @Autowired
-    private OrikaBeanMapper mapper;
-
     @Transactional(readOnly = true)
     @Override
-    public SymbolDto getSymbol(Long id) {
+    public Symbol getSymbol(Long id) {
         Optional<Symbol> symbol = symbolRepository.findOne(id);
         if (!symbol.isPresent()) {
             throw new SymbolNotFoundException(id);
         }
-        return mapper.map(symbol, SymbolDto.class);
+        return symbol.get();
     }
 
     @Override
-    public List<SymbolDto> getSymbols() {
+    public Symbol getSymbolByShortcut(String shortcut) {
+        Optional<Symbol> symbol = symbolRepository.findByShortcut(shortcut);
+        if (!symbol.isPresent()) {
+            throw new SymbolNotFoundException(shortcut);
+        }
+        return symbol.get();
+    }
+
+    @Override
+    public List<Symbol> getSymbols() {
         List<Symbol> symbols = symbolRepository.findAll();
-        List<SymbolDto> symbolsDto = new ArrayList<SymbolDto>();
-        symbols.forEach(symbol -> symbolsDto.add(mapper.map(symbol, SymbolDto.class)));
-        return symbolsDto;
+        return symbols;
     }
 }

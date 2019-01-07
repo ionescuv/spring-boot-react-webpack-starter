@@ -4,8 +4,10 @@ import java.util.List;
 
 public interface SymbolService {
 
-    SymbolDto getSymbol(Long id);
+    Symbol getSymbol(Long id);
 
-    List<SymbolDto> getSymbols();
+    Symbol getSymbolByShortcut(String shortcut);
+
+    List<Symbol> getSymbols();
 
 }

@@ -95,4 +95,6 @@ public interface CustomCrudRepository<T, ID extends Serializable> extends Reposi
 	 * Deletes all entities managed by the repository.
 	 */
 	void deleteAll();
+
+
 }
