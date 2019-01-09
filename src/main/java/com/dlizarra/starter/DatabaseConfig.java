@@ -1,14 +1,16 @@
 package com.dlizarra.starter;
 
-import javax.sql.DataSource;
-
+import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 
-import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfig {
@@ -49,5 +51,15 @@ public class DatabaseConfig {
 			return ds;
 		}
 	}
+
+    @Configuration
+    @Slf4j
+    static class RestTemplateConfig {
+        @Bean
+        public RestTemplate restTemplate(RestTemplateBuilder builder) {
+            log.info("Initialised restTemplate");
+            return builder.build();
+        }
+    }
 
 }

@@ -1,19 +1,20 @@
 package com.dlizarra.starter.support.orika;
 
-import java.util.Map;
-
+import ma.glasnost.orika.Converter;
+import ma.glasnost.orika.Mapper;
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.converter.ConverterFactory;
+import ma.glasnost.orika.converter.builtin.PassThroughConverter;
+import ma.glasnost.orika.impl.ConfigurableMapper;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
+import ma.glasnost.orika.metadata.ClassMapBuilder;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import ma.glasnost.orika.Converter;
-import ma.glasnost.orika.Mapper;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.converter.ConverterFactory;
-import ma.glasnost.orika.impl.ConfigurableMapper;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.metadata.ClassMapBuilder;
+import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * Orika mapper exposed as a Spring Bean. It contains the configuration for the mapper factory and factory builder. It
@@ -66,6 +67,7 @@ public class OrikaBeanMapper extends ConfigurableMapper implements ApplicationCo
 	 */
 	public void addConverter(final Converter<?, ?> converter) {
 		factory.getConverterFactory().registerConverter(converter);
+		factory.getConverterFactory().registerConverter(new PassThroughConverter(LocalDate.class));
 	}
 
 	/**

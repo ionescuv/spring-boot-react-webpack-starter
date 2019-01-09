@@ -1,11 +1,8 @@
 package com.dlizarra.starter.holdings;
 
 import com.dlizarra.starter.support.AbstractUnitTest;
-import com.dlizarra.starter.support.orika.OrikaBeanMapper;
 import com.dlizarra.starter.symbol.Symbol;
-import com.dlizarra.starter.symbol.SymbolDto;
 import com.dlizarra.starter.symbol.SymbolService;
-import com.dlizarra.starter.symbol.SymbolServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
