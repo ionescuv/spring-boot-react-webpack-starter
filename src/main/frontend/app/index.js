@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../style/style.css'
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import App from './App';
 
 ReactDOM.render(
-	<h1 className="testblue">App working</h1>,
-	document.querySelector('.container'));
+  <BrowserRouter>
+  <App />
+  </BrowserRouter>, document.querySelector('.container'));

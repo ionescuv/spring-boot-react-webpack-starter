@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -14,6 +13,6 @@ public class QuoteDto {
     private String symbolDescription;
     private BigDecimal price;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate tradingDay;
+    private String tradingDay;
 
 }

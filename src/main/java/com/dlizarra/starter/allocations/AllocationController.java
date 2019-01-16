@@ -2,10 +2,7 @@ package com.dlizarra.starter.allocations;
 
 import com.dlizarra.starter.support.orika.OrikaBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +30,8 @@ public class AllocationController {
         return mapper.map(allocation, AllocationDto.class);
     }
 
-    @RequestMapping(value = "/api/allocations", method = RequestMethod.POST)
-    public void postAllocation(AllocationDto allocationDto) {
+    @RequestMapping(value = "/api/allocations", method = RequestMethod.POST, consumes = "application/json")
+    public void postAllocation(@RequestBody AllocationDto allocationDto) {
         final Allocation allocation = mapper.map(allocationDto, Allocation.class);
         allocationService.createAllocation(allocation);
     }

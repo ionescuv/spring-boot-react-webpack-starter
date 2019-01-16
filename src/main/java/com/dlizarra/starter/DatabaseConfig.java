@@ -58,7 +58,7 @@ public class DatabaseConfig {
         @Bean
         public RestTemplate restTemplate(RestTemplateBuilder builder) {
             log.info("Initialised restTemplate");
-            return builder.build();
+            return builder.setConnectTimeout(10000).setReadTimeout(10000).build();
         }
     }
 
