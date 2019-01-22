@@ -35,11 +35,25 @@ if (TARGET === 'start' || !TARGET) {
         devServer: {
             port: 9090,
             proxy: {
-                '/': {
-                    target: 'http://localhost:8080',
-                    secure: false,
-                    prependPath: false
-                }
+
+                '/login': {
+                                    target: 'http://localhost:8888',
+                                    secure: false,
+                                    changeOrigin: true,
+                                    prependPath: false
+                                },
+                '/api': {
+                                    target: 'http://localhost:8080',
+                                    secure: false,
+                                    prependPath: false,
+                                     changeOrigin: true,
+                                },
+              '/': {
+                                                 target: 'http://localhost:8080',
+                                                 secure: false,
+                                                 prependPath: false,
+                                                  changeOrigin: true,
+                                             },
             },
             publicPath: 'http://localhost:9090/',
             historyApiFallback: true
