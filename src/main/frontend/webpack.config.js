@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
     source: path.join(__dirname, 'app'),
-    output: path.join(__dirname, '../../../target/classes/static')
+    output: path.join(__dirname, 'build')
 };
 
 const common = {
@@ -13,7 +13,7 @@ const common = {
     ],
     output: {
         path: PATHS.output,
-        publicPath: '',
+        publicPath: '/',
         filename: 'bundle.js'
     },
     module: {
@@ -34,8 +34,8 @@ if (TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
         devServer: {
             port: 9090,
+            contentBase: path.join(__dirname, "build"),
             proxy: {
-
                 '/login': {
                                     target: 'http://localhost:8888',
                                     secure: false,
@@ -47,13 +47,7 @@ if (TARGET === 'start' || !TARGET) {
                                     secure: false,
                                     prependPath: false,
                                      changeOrigin: true,
-                                },
-              '/': {
-                                                 target: 'http://localhost:8080',
-                                                 secure: false,
-                                                 prependPath: false,
-                                                  changeOrigin: true,
-                                             },
+                                }
             },
             publicPath: 'http://localhost:9090/',
             historyApiFallback: true
