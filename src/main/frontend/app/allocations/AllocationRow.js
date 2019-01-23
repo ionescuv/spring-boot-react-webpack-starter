@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter, Route} from 'react-router-dom';
 
 class AllocationRow extends Component {
+constructor(props){
+  super(props);
+  this.delete = this.delete.bind(this);
+  this.state = {
+     toAllocation: false,
+    };
+ }
+
+   delete() {
+         fetch('/api/allocations/' + this.props.obj.symbol, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+          }).then(response => {
+                    if(response.ok) return this.setState(() => ({ toAllocation: true }))
+                    throw new Error('Request failed.');
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
+     }
+
   render() {
     return (
         <tr>
@@ -15,10 +39,10 @@ class AllocationRow extends Component {
             {this.props.obj.percentage}%
            </td>
            <td>
-            <Link to={"/edit/"+this.props.obj.symbol} className="btn btn-primary">Edit</Link>
+            <Link to={this.props.url + '/edit/' +this.props.obj.symbol} className="btn btn-primary">Edit</Link>
            </td>
            <td>
-             <Link to={"/delete/"+this.props.obj.symbol} className="btn btn-primary">Delete</Link>
+            <button onClick={this.delete} className="btn btn-danger">Delete</button>
            </td>
         </tr>
     );

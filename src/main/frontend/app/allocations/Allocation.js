@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllocationRow from './AllocationRow';
 import {FormControl, FormGroup, HelpBlock, Form, ControlLabel, Button, Col} from 'react-bootstrap';
-import {Link, Route, BrowserRouter} from 'react-router-dom';
+import {Link, Route, BrowserRouter, Switch} from 'react-router-dom';
 import CreateAllocation from './CreateAllocation';
-
+import EditAllocation from './EditAllocation';
 
 export default class Allocation extends Component {
 
@@ -37,9 +37,9 @@ componentWillReceiveProps (nextProps) {
       });
   }
 
-   tabRow(){
-        return this.state.allocations.map(function(object, i){
-            return <AllocationRow obj={object} key={i} />;
+   tabRow(path, url){
+        return this.state.allocations.map(function(object){
+            return <AllocationRow obj={object} key={object.symbol} path={path} url={url}/>;
         });
       }
 
@@ -51,7 +51,8 @@ componentWillReceiveProps (nextProps) {
         <FormGroup controlId="formAllocationList">
             <ControlLabel>Allocations List</ControlLabel>{' '}
           </FormGroup>{' '}
-            <Link to={this.props.match.url + '/create'} className="btn btn-default">Create</Link>
+          <br/>
+            <Link to={this.props.match.url + '/create'} className="btn btn-primary">Create</Link>
         </Form>
           <table className="table table-striped" style={{ marginTop: 20 }}>
             <thead>
@@ -63,11 +64,14 @@ componentWillReceiveProps (nextProps) {
               </tr>
             </thead>
             <tbody>
-              { this.tabRow() }
+              { this.tabRow(this.props.match.path, this.props.match.url) }
             </tbody>
           </table>
-
+            <Switch>
            <Route path={this.props.match.path + '/create'} component={CreateAllocation}/>
+           <Route path={this.props.match.path + '/edit/:symbol'} component={EditAllocation}/>
+           </Switch>
+
            </div>
         </BrowserRouter>
 

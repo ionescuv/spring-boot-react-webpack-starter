@@ -30,6 +30,7 @@ class App extends Component {
         {this.state.accessToken ?
           <Router>
             <div className="container">
+
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <Link to={'/'} className="navbar-brand">Holdings Maintainance</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,7 +58,7 @@ class App extends Component {
               </Switch>
             </div>
           </Router>
-          : <Router><Link to={'/login'} className="btn btn-primary">Log In</Link></Router>
+          : <Router><Link to={'/login'} target="_self" className="btn btn-primary">Log In</Link></Router>
         }
       </div>
     );

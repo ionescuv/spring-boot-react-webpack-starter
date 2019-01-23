@@ -36,13 +36,13 @@ public class AllocationController {
         allocationService.createAllocation(allocation);
     }
 
-    @RequestMapping(value = "/api/allocations/{symbol}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/allocations/{symbol}", method = RequestMethod.DELETE, consumes = "application/json")
     public void deleteAllocation(@PathVariable String symbol) {
         allocationService.deleteAllocation(symbol);
     }
 
-    @RequestMapping(value = "/api/allocations/{symbol}", method = RequestMethod.PUT)
-    public void updateAllocation(@PathVariable String symbol, AllocationDto allocationDto) {
+    @RequestMapping(value = "/api/allocations/{symbol}", method = RequestMethod.PUT, consumes = "application/json")
+    public void updateAllocation(@PathVariable String symbol, @RequestBody AllocationDto allocationDto) {
         final Allocation allocation = mapper.map(allocationDto, Allocation.class);
         allocationService.updateAllocation(allocation);
     }

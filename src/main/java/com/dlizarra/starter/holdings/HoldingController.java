@@ -30,19 +30,19 @@ public class HoldingController {
         return mapper.map(holding, HoldingDto.class);
     }
 
-    @RequestMapping(value = "/api/holdings", method = RequestMethod.POST)
-    public void postHolding(HoldingDto holdingDto) {
+    @RequestMapping(value = "/api/holdings", method = RequestMethod.POST, consumes = "application/json")
+    public void postHolding(@RequestBody HoldingDto holdingDto) {
         final Holding holding = mapper.map(holdingDto, Holding.class);
         holdingService.createHolding(holding);
     }
 
-    @RequestMapping(value = "/api/holdings/{symbol}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/holdings/{symbol}", method = RequestMethod.DELETE, consumes = "application/json")
     public void deleteHolding(@PathVariable String symbol) {
         holdingService.deleteHolding(symbol);
     }
 
-    @RequestMapping(value = "/api/holdings/{symbol}", method = RequestMethod.PUT)
-    public void updateHolding(@PathVariable String symbol, HoldingDto holdingDto) {
+    @RequestMapping(value = "/api/holdings/{symbol}", method = RequestMethod.PUT, consumes = "application/json")
+    public void updateHolding(@PathVariable String symbol, @RequestBody HoldingDto holdingDto) {
         final Holding holding = mapper.map(holdingDto, Holding.class);
         holdingService.updateHolding(holding);
     }
